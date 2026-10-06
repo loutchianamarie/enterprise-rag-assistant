@@ -110,6 +110,6 @@ tests/              unit and API tests
 .github/workflows/  CI
 ```
 
-## Author
+## Project context
 
-Loutchiana Marie · Personal portfolio project · [GitHub](https://github.com/loutchianamarie) · [LinkedIn](https://www.linkedin.com/in/loutchianamarie/)
+Prepared for Loutchiana Marie's personal portfolio with Codex assistance in October 2026. This new project demonstrates an approach she can inspect, run, and extend; it is separate from her academic and professional projects. [GitHub](https://github.com/loutchianamarie) · [LinkedIn](https://www.linkedin.com/in/loutchianamarie/)
