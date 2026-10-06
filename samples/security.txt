@@ -1,0 +1,2 @@
+ExampleCo is a fictional company. This document is synthetic and contains no real security procedures.
+The sample help desk requires multi-factor authentication for access to the support portal. A lost device should be reported to the fictional security desk within one working day. Staff should never send passwords or recovery codes through chat. Access to restricted documents is granted by a designated administrator and reviewed quarterly.

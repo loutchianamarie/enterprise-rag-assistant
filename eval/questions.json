@@ -1,0 +1,6 @@
+[
+  {"question": "How many annual leave days can employees request?", "source": "benefits.txt"},
+  {"question": "What is required for access to the support portal?", "source": "security.txt"},
+  {"question": "When should a travel receipt be submitted?", "source": "expenses.txt"},
+  {"question": "Who won the 2030 design award?", "source": null}
+]
