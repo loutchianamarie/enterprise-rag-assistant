@@ -57,6 +57,20 @@ curl -s http://127.0.0.1:8000/query -H 'Content-Type: application/json' \
 
 The response includes an answer, a `citations` array with title and excerpt, `retrieved`, `latency_ms`, and `usage`. In extractive mode the answer begins `Relevant excerpt:`. An unsupported question returns `I don't know from these documents.` with an empty citation list.
 
+Selected fields from a local run with the fictional sample corpus (the full response also includes the cited excerpt and measured `latency_ms`):
+
+```json
+{
+  "answer": "Relevant excerpt: ExampleCo is a fictional company. This document is synthetic and contains no employee data. Employees may request up to 20 days of annual leave each calendar year.",
+  "mode": "extractive",
+  "citations": [{"source_id": "1", "title": "benefits.txt"}],
+  "retrieved": 1,
+  "usage": {}
+}
+```
+
+The `answer` above is shortened for display. For `Who won the 2030 design award?`, the same local run returned `"answer": "I don't know from these documents."`, `"citations": []`, and `"retrieved": 0`.
+
 ### Semantic embeddings and local LLM
 
 ```bash
@@ -97,6 +111,8 @@ python eval/run_eval.py
 ```
 
 The evaluation file contains four synthetic questions: three with expected source documents and one that should be refused. The script reports citation/refusal passes and measured request latency. It does not claim semantic quality from the hash baseline. LLM providers return input/output token counts when available; dollar cost is intentionally unreported because it depends on the chosen provider and current pricing. Additional evaluation should test paraphrases, adversarial excerpts, hallucinations despite plausible citations, language variation, and cost at scale.
+
+**Observed failure and correction:** the first four-case hash-mode evaluation passed only 3/4. The unsupported design-award question retrieved a document because common words contributed to the lexical vector, producing a false citation. The hash baseline now removes a small stopword set; the same four cases pass 4/4. This is a narrow correction, not a demonstrated false-answer rate. A different unsupported question can still cross the fixed cosine threshold, and a retrieved citation does not prove that an answer is supported. A semantic/LLM benchmark needs its own larger, adversarial evaluation set before claiming answer quality.
 
 PDF extraction does not include OCR. The JSON index is intentionally small-scale and has no update/delete endpoint. Citation validation confirms the model cited a retrieved chunk; it cannot prove the answer is entailed by that chunk. The prompt-injection controls are defense in depth, not a guarantee against hostile documents. No production deployment, user metrics, or accuracy claims are made.
 
